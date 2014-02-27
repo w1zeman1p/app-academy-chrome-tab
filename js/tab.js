@@ -36,6 +36,20 @@ $(document).ready(function(){
 
   //
 
+  var Desk = function(){
+    var desk = localStorage["desk"];
+
+    if(!desk){
+      return;
+    }
+
+    var $el = $("<h2 id='desk'></h2>");
+    $el.text(desk);
+    $(".wrap").prepend($el);
+  }
+
+  //
+
   var Pairs = function(){
     var desk = localStorage["desk"];
 
@@ -81,5 +95,6 @@ $(document).ready(function(){
   };
 
   Clock();
+  Desk();
   Pairs();
 });
