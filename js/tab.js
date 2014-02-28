@@ -20,9 +20,9 @@ $(document).ready(function(){
 
   var timeStamp = function(){
     var t = new Date();
-    var time = t.getHours() % 4;
+    var hours = t.getHours();
 
-    return dateStamp + ", " + time;
+    return dateStamp + ", " + hours;
   }();
 
   //
@@ -151,15 +151,23 @@ $(document).ready(function(){
     var url = "http://api.openweathermap.org/data/2.5/weather?id=5128581&units=metric";
     var weather = JSON.parse(localStorage["weather"] || "{}");
 
+    function cToF(c){
+      return parseInt((c * 5 / 9) + 32);
+    }
+
     function displayWeather(obj){
-      var html = "<em class='weather-left' title='";
-      html += obj.weather[0].description;
-      html += "'>";
+      var c = parseInt(obj.main.temp);
+
+      var html = "<em class='weather-left'>";
       html += obj.weather[0].main;
-      html += "</em>";
-      html += "<em class='weather-right'>";
-      html += parseInt(obj.main.temp);
-      html += "&deg;C";
+      html += "<span> &mdash; ";
+      html += obj.weather[0].description;
+      html += "</span></em>";
+      html += "<em class='weather-right'><span>";
+      html += cToF(c);
+      html += "&deg; F / </span>";
+      html += c;
+      html += "&deg; C";
       html += "</em>";
 
       $("header").prepend(html);

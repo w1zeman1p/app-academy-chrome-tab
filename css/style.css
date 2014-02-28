@@ -74,6 +74,14 @@ header em {
   font-weight: 400;
 }
 
+header em span {
+  display: none;
+}
+
+header:hover em span {
+  display: inline;
+}
+
 header .weather-left {
   left: 0;
 }
