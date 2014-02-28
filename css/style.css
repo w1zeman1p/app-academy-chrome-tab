@@ -1,6 +1,6 @@
 html, body, div, h1, h2, section, ul,
 li, a, form, input, button, img, strong,
-header, footer, main, nav, p, strong {
+header, footer, main, nav, p, strong, em {
   margin: 0;
   padding: 0;
   border: 0;
@@ -62,6 +62,24 @@ header {
   background: #f00;
   text-align: center;
   z-index: 3;
+}
+
+header em {
+  position: absolute;
+  top: 0;
+  display: block;
+  color: #fff;
+  padding: 20px 22px 15px 22px;
+  font-family: "Montserrat";
+  font-weight: 400;
+}
+
+header .weather-left {
+  left: 0;
+}
+
+header .weather-right {
+  right: 0;
 }
 
 .logo {

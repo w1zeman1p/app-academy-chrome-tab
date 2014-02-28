@@ -18,6 +18,13 @@ $(document).ready(function(){
     return stamp;
   }();
 
+  var timeStamp = function(){
+    var t = new Date();
+    var time = t.getHours() % 4;
+
+    return dateStamp + ", " + time;
+  }();
+
   //
 
   var Clock = function(){
@@ -53,6 +60,7 @@ $(document).ready(function(){
   var Info = function(){
     var desk = localStorage["desk"];
     var day = JSON.parse(localStorage["day"] || "{}");
+    var url = "http://aa-progress-tracker.herokuapp.com/api/pairs.json";
 
     function displayInfo(obj){
       displayDesks(obj);
@@ -126,12 +134,51 @@ $(document).ready(function(){
       displayInfo(day);
     } else {
 
-      $.getJSON("http://aa-progress-tracker.herokuapp.com/api/pairs.json", function(data){
+      $.getJSON(url, function(data){
 
-        data.dateStamp = dateStamp;
-        localStorage["day"] = JSON.stringify(data);
+        day = data;
+        day.dateStamp = dateStamp;
+        localStorage["day"] = JSON.stringify(day);
 
-        displayInfo(data);
+        displayInfo(day);
+      });
+    }
+  };
+
+  //
+
+  var Weather = function(){
+    var url = "http://api.openweathermap.org/data/2.5/weather?id=5128581&units=metric";
+    var weather = JSON.parse(localStorage["weather"] || "{}");
+
+    function displayWeather(obj){
+      var html = "<em class='weather-left' title='";
+      html += obj.weather[0].description;
+      html += "'>";
+      html += obj.weather[0].main;
+      html += "</em>";
+      html += "<em class='weather-right'>";
+      html += parseInt(obj.main.temp);
+      html += "&deg;C";
+      html += "</em>";
+
+      $("header").prepend(html);
+
+      console.log(obj);
+    }
+
+
+    if(weather && weather.timeStamp == timeStamp){
+      displayWeather(weather);
+    } else {
+
+      $.getJSON(url, function(data){
+
+        weather = data;
+        weather.timeStamp = timeStamp;
+        localStorage["weather"] = JSON.stringify(weather);
+
+        displayWeather(weather);
       });
     }
   };
@@ -139,4 +186,5 @@ $(document).ready(function(){
   Clock();
   Desk();
   Info();
+  Weather();
 });
