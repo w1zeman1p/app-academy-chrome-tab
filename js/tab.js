@@ -65,6 +65,7 @@ $(document).ready(function(){
     function displayInfo(obj){
       displayDesks(obj);
       displayBar(obj);
+      highlightCurriculum(obj);
     }
 
     function displayDesks(obj){
@@ -128,6 +129,29 @@ $(document).ready(function(){
       html += "</p>";
 
       $("#info").html(html);
+    }
+
+    function highlightCurriculum(obj){
+      var w = parseInt(obj.day[1]);
+      var n = 0;
+
+      if(w < 3){
+        n = 1;
+      }
+      else if(w == 3){
+        n = 2;
+      }
+      else if(w < 6){
+        n = 3;
+      }
+      else if(w < 8){
+        n = 4;
+      }
+      else if(w < 10){
+        n = 5;
+      }
+
+      $("section:first li:nth-child(" + n + ")").addClass("current");
     }
 
     if(day && day.dateStamp == dateStamp){
