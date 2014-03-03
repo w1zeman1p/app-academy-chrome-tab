@@ -114,7 +114,7 @@ $(document).ready(function(){
       var html = "<p>";
       html += dateStamp + " &mdash; " + obj.day.toUpperCase();
 
-      if(desk && obj.pairs[desk].length){
+      if(desk && obj.pairs[desk] && obj.pairs[desk].length){
         html += " &mdash; ";
 
         html += obj.pairs[desk].map(function(student){

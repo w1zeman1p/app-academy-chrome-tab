@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+  localStorage["day"] = null;
+
   $("#input-desk").val(localStorage["desk"] || "");
   $("#input-password").val(localStorage["password"] || "");
 
