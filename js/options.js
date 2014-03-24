@@ -9,8 +9,6 @@ $(document).ready(function(){
   var saveForm = function(event){
     event.preventDefault();
 
-    console.log("asdfasd");
-    debugger;
     localStorage["desk"] = $("#input-desk").val();
     localStorage["cityId"] = $("#input-city").val();
     localStorage["password"] = $("#input-password").val();
