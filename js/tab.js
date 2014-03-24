@@ -1,5 +1,20 @@
 $(document).ready(function(){
 
+  var Cities = {
+    1: "NYC",
+    2: "SF"
+  };
+
+  var getCityId = function(){
+    return (localStorage["cityId"] == "2") ? 2 : 1;
+  };
+
+  var getCity = function(){
+    return Cities[getCityId()];
+  };
+
+  //
+
   var dateStamp = function(){
     var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday',
                 'Thursday', 'Friday', 'Saturday'];
@@ -60,7 +75,7 @@ $(document).ready(function(){
   var Info = function(){
     var desk = localStorage["desk"];
     var day = JSON.parse(localStorage["day"] || "{}");
-    var url = "http://aa-progress-tracker.herokuapp.com/api/pairs.json";
+    var url = "http://aa-progress-tracker.herokuapp.com/api/pairs.json?city_id=" + getCityId();
 
     function displayInfo(obj){
       displayDesks(obj);
@@ -74,8 +89,6 @@ $(document).ready(function(){
       html += "<span>&times;</span>";
       html += "<h1>" + obj.day.toUpperCase() + " Desks</h1>"
       html += "<ul>";
-
-      console.log(obj);
 
       for (var pairDesk in obj.pairs){
         if(!obj.pairs.hasOwnProperty(pairDesk)){
@@ -172,7 +185,8 @@ $(document).ready(function(){
   //
 
   var Weather = function(){
-    var url = "http://api.openweathermap.org/data/2.5/weather?id=5128581&units=metric";
+    var weatherId = (getCity() == "SF") ? 5391959 : 5128581;
+    var url = "http://api.openweathermap.org/data/2.5/weather?id=" + weatherId + "&units=metric";
     var weather = JSON.parse(localStorage["weather"] || "{}");
 
     function cToF(c){
@@ -183,6 +197,8 @@ $(document).ready(function(){
       var c = parseInt(obj.main.temp);
 
       var html = "<em class='weather-left'>";
+      html += getCity();
+      html += " / "
       html += obj.weather[0].main;
       html += "<span> &mdash; ";
       html += obj.weather[0].description;
@@ -196,9 +212,7 @@ $(document).ready(function(){
 
       $("header").prepend(html);
 
-      console.log(obj);
     }
-
 
     if(weather && weather.timeStamp == timeStamp){
       displayWeather(weather);

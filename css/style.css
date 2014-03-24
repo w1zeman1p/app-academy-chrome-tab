@@ -1,5 +1,5 @@
 html, body, div, h1, h2, section, ul,
-li, a, form, input, button, img, strong,
+li, a, form, label, input, button, img, strong,
 header, footer, main, nav, p, strong, em {
   margin: 0;
   padding: 0;
@@ -356,7 +356,7 @@ footer a {
   overflow: hidden;
   background: url("../img/app-academy-logo-black.png") no-repeat 0 0;
   background-size: 40px;
-  z-index: 1;
+  z-index: 5;
 }
 
 /* OPTIONS */
@@ -384,15 +384,23 @@ form #info.show {
   margin: 30px 0;
 }
 
-.input label {
+.input label,
+.input .label {
   font-weight: 700;
   padding: 0 0 5px 0;
 }
 
-.input input {
+.input input[type="password"],
+.input input[type="number"],
+.input input[type="password"]
+ {
   padding: 10px;
   border: 1px solid #ccc;
   width: 300px;
+  font-size: 20px;
+}
+
+.input select {
   font-size: 20px;
 }
 
