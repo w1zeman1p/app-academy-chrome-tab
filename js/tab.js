@@ -60,7 +60,7 @@ $(document).ready(function(){
   var Info = function(){
     var desk = localStorage["desk"];
     var day = JSON.parse(localStorage["day"] || "{}");
-    var url = "http://aa-progress-tracker.herokuapp.com/api/pairs.json";
+    var url = "http://aa-progress-tracker.herokuapp.com/api/pairs.json?city_id=" + localStorage["cityId"];
 
     function displayInfo(obj){
       displayDesks(obj);
@@ -172,7 +172,13 @@ $(document).ready(function(){
   //
 
   var Weather = function(){
-    var url = "http://api.openweathermap.org/data/2.5/weather?id=5128581&units=metric";
+    var url;
+    if(localStorage["cityId"] == 1 /*NY*/) {
+      url = "http://api.openweathermap.org/data/2.5/weather?id=5128581&units=metric";
+    } else {
+      url = "http://api.openweathermap.org/data/2.5/weather?id=5391959&units=metric";
+    }
+
     var weather = JSON.parse(localStorage["weather"] || "{}");
 
     function cToF(c){
@@ -203,13 +209,10 @@ $(document).ready(function(){
     if(weather && weather.timeStamp == timeStamp){
       displayWeather(weather);
     } else {
-
       $.getJSON(url, function(data){
-
         weather = data;
         weather.timeStamp = timeStamp;
         localStorage["weather"] = JSON.stringify(weather);
-
         displayWeather(weather);
       });
     }
