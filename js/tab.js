@@ -190,7 +190,7 @@ $(document).ready(function(){
     var weather = JSON.parse(localStorage["weather"] || "{}");
 
     function cToF(c){
-      return parseInt((c * 5 / 9) + 32);
+      return parseInt((c * 9 / 5) + 32);
     }
 
     function displayWeather(obj){
