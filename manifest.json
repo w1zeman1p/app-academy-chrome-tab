@@ -6,11 +6,11 @@
   "chrome_url_overrides" : {
     "newtab": "tab.html"
   },
-  "permissions": ["tabs", "http://aa-progress-tracker.herokuapp.com/", "http://*.appacademy.io/"],
+  "permissions": ["tabs", "storage", "http://aa-progress-tracker.herokuapp.com/", "http://*.appacademy.io/"],
   "content_scripts": [
     {
-      "matches": ["*://aa-progress-tracker.herokuapp.com/*", "*://*.appacademy.io/*"],
-      "js": ["js/jquery-2.1.0.min.js", "js/tools.js"]
+      "matches": ["*://aa-progress-tracker.herokuapp.com/*", "*://*.appacademy.io/*", "*://progress.dev/*"],
+      "js": ["js/jquery-2.1.0.min.js", "js/sjcl.js", "js/tools.js"]
     }
   ],
   "options_page": "options.html"
