@@ -157,11 +157,14 @@ $(document).ready(function(){
       else if(w < 6){
         n = 3;
       }
-      else if(w < 8){
+      else if(w < 7){
         n = 4;
       }
+      else if(w == 7){
+        n = 5
+      }
       else if(w < 10){
-        n = 5;
+        n = 6;
       }
 
       $("section:first li:nth-child(" + n + ")").addClass("current");
