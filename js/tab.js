@@ -75,7 +75,7 @@ $(document).ready(function(){
   var Info = function(){
     var desk = localStorage["desk"];
     var day = JSON.parse(localStorage["day"] || "{}");
-    var url = "http://aa-progress-tracker.herokuapp.com/api/pairs.json?city_id=" + getCityId();
+    var url = "http://progress.appacademy.io/api/pairs.json?city_id=" + getCityId();
 
     function displayInfo(obj){
       displayDesks(obj);
