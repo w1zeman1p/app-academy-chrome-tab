@@ -113,13 +113,13 @@ $(document).ready(function(){
 
       html += "<ul></article>";
 
-      $(".wrap")
+      $("body")
         .append(html)
         .on("click", "#desk", function(event){
-          $(".wrap").addClass("has-desks");
+          $("body").addClass("has-desks");
         })
         .on("click", "#desks > span", function(event){
-          $(".wrap").removeClass("has-desks");
+          $("body").removeClass("has-desks");
         });
     }
 
@@ -145,25 +145,25 @@ $(document).ready(function(){
     }
 
     function highlightCurriculum(obj){
-      var w = parseInt(obj.day[1]);
+      var wd = parseInt(obj.ord);
       var n = 0;
 
-      if(w < 3){
+      if(wd < 31){
         n = 1;
       }
-      else if(w == 3){
+      else if(wd < 41){
         n = 2;
       }
-      else if(w < 6){
+      else if(wd < 54){
         n = 3;
       }
-      else if(w < 7){
+      else if(wd < 71){
         n = 4;
       }
-      else if(w == 7){
-        n = 5
+      else if(wd < 82){
+        n = 5;
       }
-      else if(w < 10){
+      else {
         n = 6;
       }
 

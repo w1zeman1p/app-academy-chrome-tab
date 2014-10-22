@@ -299,10 +299,10 @@ section li a:hover {
 #desks {
   display: none;
   position: absolute;
-  z-index: 2;
-  top: 80px;
+  z-index: 6;
+  top: 50%;
   left: 50%;
-  margin-left: -260px;
+  transform: translateY(-50%) translateX(-50%);
   min-width: 400px;
   padding: 50px 60px;
   background: #00f;
