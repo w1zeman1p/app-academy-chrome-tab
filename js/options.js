@@ -49,6 +49,7 @@ var saveForm = function(event){
   event.preventDefault();
 
   localStorage["desk"] = $("#input-desk").val();
+  localStorage["podId"] = $("#input-pod-id").val();
   localStorage["password"] = $("#input-password").val();
   localStorage["cityId"] = $("#input-location input:checked").val();
 

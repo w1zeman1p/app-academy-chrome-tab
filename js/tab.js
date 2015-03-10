@@ -74,6 +74,7 @@ $(document).ready(function(){
 
   var Info = function(){
     var desk = localStorage["desk"];
+    var podId = localStorage["podId"];
     var day = JSON.parse(localStorage["day"] || "{}");
     var url = "http://progress.appacademy.io/api/pairs.json?city_id=" + getCityId();
 
@@ -90,8 +91,9 @@ $(document).ready(function(){
       html += "<h1>" + obj.day.toUpperCase() + " Desks</h1>"
       html += "<ul>";
 
-      for (var pairDesk in obj.pairs){
-        if(!obj.pairs.hasOwnProperty(pairDesk)){
+      var pairs = obj.pods[podId || "1"].pairs;
+      for (var pairDesk in pairs){
+        if(!pairs.hasOwnProperty(pairDesk)){
           continue;
         }
 
@@ -100,7 +102,7 @@ $(document).ready(function(){
         html += pairDesk + "</strong>";
         html += " &mdash; ";
 
-        html += obj.pairs[pairDesk].map(function(student){
+        html += pairs[pairDesk].map(function(student){
           var sHtml = "<a href='https://github.com/";
           sHtml += student.github + "'>";
           sHtml += student.name + "</a>";
@@ -124,13 +126,16 @@ $(document).ready(function(){
     }
 
     function displayBar(obj){
+      var pod = obj.pods[podId || "1"];
+      var pairs = pod.pairs;
+
       var html = "<p>";
       html += dateStamp + " &mdash; " + obj.day.toUpperCase();
 
-      if(desk && obj.pairs[desk] && obj.pairs[desk].length){
+      if(desk && pairs[desk] && pairs[desk].length){
         html += " &mdash; ";
 
-        html += obj.pairs[desk].map(function(student){
+        html += pairs[desk].map(function(student){
           var sHtml = "<a href='https://github.com/";
           sHtml += student.github + "'>";
           sHtml += student.name + "</a>";
@@ -139,6 +144,8 @@ $(document).ready(function(){
         }).join(" &amp; ");
       }
 
+      html += " &mdash; ";
+      html += pod.name;
       html += "</p>";
 
       $("#info").html(html);
